@@ -24,7 +24,9 @@ NB_MODULE(my_ext, m) {
         .def(nb::init<>())
         .def(nb::init<const std::string &>())
         .def("bark", &Dog::bark)
-        .def_rw("name", &Dog::name);  // _rw stands for read/write access
+        .def_rw("name", &Dog::name)  // _rw stands for read/write access. There is also _ro.
+        .def("__repr__",
+            [](const Dog& d) { return "<my_ext.Dog named '" + d.name + "'>"; });
 
     m.attr("the_answer") = 42;
 }
